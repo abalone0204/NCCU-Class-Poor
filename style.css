@@ -79,18 +79,24 @@ footer a:visited{
   color: #a57700;
 }
 
-th{
+
+
+/* th-width setting */
+th:nth-of-type(2){
+  width: 6%;
+}
+th:nth-of-type(11){
   width: 10%;
 }
-ol li a{
+
+td a,ol li a{
   color: blue !important;
 }
 ol li a:hover{
-
   font-weight: 600;
 }
-ol li a:hover:after{
-  content: "";
+td a,ol li a:hover:after{
+  content: "" !important;
 }
 #about_me:hover:after{
   content: "Hi, I'm Denny Ku" !important;
