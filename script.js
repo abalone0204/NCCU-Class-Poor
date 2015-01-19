@@ -3229,9 +3229,9 @@ console.log(classifications);
 //   d= classifications[i];
 //   $("#classification").append("<option value='"+d+"'>"+d+"</option>");
 // }
-  var filter = [],
-    result,
-    times;
+var filter = [],
+  result,
+  times;
 
 
 $("button").click(function() {
@@ -3240,12 +3240,12 @@ $("button").click(function() {
   };
 
   setFilter(filter);
-  
-  
+
+
   console.log(filter);
 
   result = validationFilter(filter, courses);
-  result = _.sortBy(result, function(e){
+  result = _.sortBy(result, function(e) {
     return e[5].split("")[1];
   });
   console.log(result);
@@ -3293,62 +3293,93 @@ function appendData(data) {
 }
 
 function validationFilter(filter, data) {
-    var tmp = [], reset, resetTime;
-    _.each(data, function(d) {
-        // if (filter[2] && validateClassName(filter, d)) {
-        //   reset = filter[2];
-        //   filter[2] = d[2];
-        // };
-        // if (filter[5] &&  validateTime(filter, d)) {
-        //   resetTime = filter[5];
-        //   filter[5] = d[5];
-        // };
-        if (_.intersection(_.compact(filter), d).length == _.compact(filter).length) {
-          tmp.push(d);
-        }
-    });
+  var tmp = [],
+    reset, resetTime;
+  _.each(data, function(d) {
+    if(filter[2]){
+      if (validateClassName(filter, d)) {
+        reset = filter[2];
+        filter[2] = d[2];
+      }
+    } 
 
-    return tmp;
+    // if (filter[5] &&  validateTime(filter, d)) {
+    //   resetTime = filter[5];
+    //   filter[5] = d[5];
+    // };
+    if (_.intersection(_.compact(filter), d).length == _.compact(filter).length) {
+      tmp.push(d);
+      filter[2] =reset;
+    }
+  });
+
+  return tmp;
 }
-function setFilter(filter){
+
+function setFilter(filter) {
   filter[1] = $("#point").val();
   filter[2] = $("#className").val();
   filter[3] = $("#proName").val();
   filter[4] = $("#classification option:selected").val();
   filter[5] = $("#timeClassification").val();
-  
+
   return filter;
 }
 
-function validateClassName(filter, item){
+function validateClassName(filter, item) {
   var target = filter[2].split(""),
-      data = item[2].split(""), flag;
-      interLength = parseFloat(_.intersection(target, data).length);
-      if (_.intersection(target, data)== 0) {
-        flag = false;
-      }else if (data.length<=4) {
-        if (interLength >=2) {
-          flag = true;
-        };
-      } else{
-        if ((interLength/data.length )>0.5) {
-          flag = true;
-        };
-      }
-      if (flag) {
-        return true;
-      } else{
-        return false;
-      };
+    data = item[2].split(""),
+    flag;
+  interLength = parseFloat(_.intersection(target, data).length);
+  if(_.intersection(target, data) == 0){
+    flag =false;
+  } else if(target.join("") == data.join("")){
+    flag=true;
+  } else if(target.length > data.length){
+    if (interLength/target.length > 0.5) {
+      flag =true;
+    };
+  } else if((data.length-target.length)<=target.length){
+    if (interLength == target.length) {
+      flag=true;
+    };
+  } else if(data.length>=5){
+    if (interLength >=3) {
+      flag=true;  
+    };
+  }
+  else {
+    flag= false;
+  }
+  //  if (_.intersection(target, data) == 0) {
+  //   flag = false;
+  // }else if(target.join("") == data.join("")){
+  //   flag = true;
+  // } else if ((data.length) <= 4) {
+  //   if (interLength / target.length>= 0.5) {
+  //     flag = true;
+  //   };
+  // } else if (interLength / (data.length - target.length)>=0.5) {
+  //   flag = true;
+  // } else {
+  //   if ((interLength / data.length) > 0.5) {
+  //     flag = true;
+  //   };
+  // }
+  if (flag) {
+    return true;
+  } else {
+    return false;
+  };
 }
 
-function validateTime(filter, item){
+function validateTime(filter, item) {
   var target = filter[5].split(""),
-  data = item[5].split("");
+    data = item[5].split("");
   if (data[0] == target[0]) {
-    if (_.intersection(target, data).length-1>=2) {
+    if (_.intersection(target, data).length - 1 >= 2) {
       return true;
-    }else{
+    } else {
       return false;
     };
   };
