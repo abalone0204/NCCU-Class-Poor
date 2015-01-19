@@ -3295,18 +3295,16 @@ function appendData(data) {
 function validationFilter(filter, data) {
     var tmp = [], reset, resetTime;
     _.each(data, function(d) {
-        if (filter[2] && validateClassName(filter, d)) {
-          reset = filter[2];
-          filter[2] = d[2];
-        };
-        if (filter[5] &&  validateTime(filter, d)) {
-          resetTime = filter[5];
-          filter[5] = d[5];
-        };
-        if (_.intersection(filter, d).length == _.compact(filter).length) {
+        // if (filter[2] && validateClassName(filter, d)) {
+        //   reset = filter[2];
+        //   filter[2] = d[2];
+        // };
+        // if (filter[5] &&  validateTime(filter, d)) {
+        //   resetTime = filter[5];
+        //   filter[5] = d[5];
+        // };
+        if (_.intersection(_.compact(filter), d).length == _.compact(filter).length) {
           tmp.push(d);
-          filter[2]= reset;
-          filter[5] = resetTime;
         }
     });
 
@@ -3325,13 +3323,19 @@ function setFilter(filter){
 function validateClassName(filter, item){
   var target = filter[2].split(""),
       data = item[2].split(""), flag;
-      interLength = parseFloat(_.intersection(target, data).length-1);
-      if (target.length >= data.length) {
-        flag = interLength/target.length;
+      interLength = parseFloat(_.intersection(target, data).length);
+      if (_.intersection(target, data)== 0) {
+        flag = false;
+      }else if (data.length<=4) {
+        if (interLength >=2) {
+          flag = true;
+        };
       } else{
-        flag = interLength/target.length;
+        if ((interLength/data.length )>0.5) {
+          flag = true;
+        };
       }
-      if (flag >= 0.5) {
+      if (flag) {
         return true;
       } else{
         return false;

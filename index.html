@@ -3,36 +3,50 @@
   <head>
     <meta charset="UTF-8">
     <title>NCCU fucking shit</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body class="container">
     <div class="search">
-      <div class="className">
-        <label for="className">科目中文名稱</label>
-        <input type="text" name="className" id="className">
+      <div class="row">
+        <div class="className form-group col-xs-6">
+          <label for="className" >科目中文名稱</label>
+          <input type="text" name="className" id="className" placeholder="請輸入完整的科目名稱" class="form-control">
+        </div>
       </div>
-      <div class="classClassificationContainer">
-        <label for="classification">開課系級</label>
-        <select name="classification" id="classification">
-          <option value=""></option>
-          <option value="all">全部</option>
-        </select>
+      <!-- <div class="row">
+        <div class="classClassificationContainer form-group col-xs-6 ">
+          <label for="classification">開課系級</label>
+          <select name="classification" id="classification" class="form-control">
+            <option value=""></option>
+            <option value="all">全部</option>
+          </select>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="timeClassificationContainer form-group col-xs-6 ">
+          <label for="timeClassification">開課時間</label>
+          <input type="text" placeholder="例：四CD，英文請用大寫" id="timeClassification" class="form-control">
+        </div>
       </div>
-      <div class="timeClassificationContainer">
-        <label for="timeClassification">開課時間</label>
-        <input type="text" placeholder="例：四CD，英文請用大寫" id="timeClassification">
+      <div class="row">
+        <div class="pointContainer form-group col-xs-6 ">
+          <label for="point">學分數</label>
+          <input type="number" for="point" id="point" class="form-control">
+        </div>
       </div>
-      <div class="pointContainer">
-        <label for="point">學分數</label>
-        <input type="number" for="point" id="point" >
-      </div>
-      <div class="proNameContainer">
-        <label for="proName"> 教授名稱</label>
-        <input type="proName" for="proName" id="proName" >
+      <div class="row">
+        <div class="proNameContainer form-group col-xs-6 ">
+          <label for="proName"> 教授名稱</label>
+          <input type="proName" for="proName" id="proName" class="form-control">
+        </div>
       </div>
     </div>
-    <button class="search">送出</button>
+    <div class="row">
+      <button class=" col-xs-offset-3 searchBtn btn btn-default">送出</button>
+    </div>
     <div class="result">
-      <table>
+      <table class="table table-hover">
         <thead>
           <th>科目代碼</th>
           <th>學分數</th>
