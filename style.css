@@ -1,3 +1,100 @@
 .search{
-  padding-top: 10%;
+  padding-top: 2%;
+  padding-bottom: 5%;
 }
+
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes blink {
+    0%   {opacity: 1;}
+    100% {opacity: 0;}
+} 
+
+/* Standard syntax */
+@keyframes blink {
+    0%   {opacity: 1;}
+    100% {opacity: 0;}
+} 
+.nav{
+  background: black !important;
+  color: white !important;
+}
+.navbar-default{
+  background: black !important;
+  color: white; 
+}
+header{
+    padding: 20px 30px;
+  color: white;
+  background: #0d7963;
+  text-align: center;
+}
+a{
+  text-decoration: none !important;
+}
+header a:hover{
+  color: white !important;
+}
+a:visited{
+  color: white;
+}
+a:hover:after{
+    content: "_";
+    color: white !important;
+    margin-left: 5px;
+    -webkit-animation: blink 0.8s linear 0.1s infinite ; /* Chrome, Safari, Opera */
+    animation: blink 0.8s linear 0.1s infinite ; /* Standard syntax */
+}
+.shadow{
+  box-shadow: 5px 5px 20px #888888;
+}
+
+header a{
+  color: white;
+}
+footer{
+  height: 25vh;
+  text-align: center;
+}
+footer a{
+  display: inline-block;
+  margin-top:5%;
+  color: black !important;
+  font-size: 2rem;
+}
+footer a:hover:after{
+  color: black !important;
+}
+
+ul{
+  list-style: none;
+}
+
+ul li{
+  display: inline-block;
+  margin: 3rem 2rem;
+}
+footer a:visited{
+  color: #a57700;
+}
+
+th{
+  width: 10%;
+}
+ol li a{
+  color: blue !important;
+}
+ol li a:hover{
+
+  font-weight: 600;
+}
+ol li a:hover:after{
+  content: "";
+}
+#about_me:hover:after{
+  content: "Hi, I'm Denny Ku" !important;
+  animation:none;
+  color: black !important;
+}
+

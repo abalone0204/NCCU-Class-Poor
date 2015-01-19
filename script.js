@@ -3238,21 +3238,33 @@ $("button").click(function() {
   if ($('.result-row').length > 0) {
     $('.result-row').remove();
   };
-
   setFilter(filter);
-
-
-  console.log(filter);
-
   result = validationFilter(filter, courses);
   result = _.sortBy(result, function(e) {
     return e[5].split("")[1];
   });
-  console.log(result);
   // 測試用 待會記得刪掉
-
   appendData(result);
+  $("#targetTable").trigger("click");
+$('html,body').animate({
+        scrollTop: $("#targetTable").offset().top},
+        'slow');
+});
 
+$(document).keypress(function(e) {
+    if ($('.result-row').length > 0) {
+    $('.result-row').remove();
+  };
+  setFilter(filter);
+  result = validationFilter(filter, courses);
+  result = _.sortBy(result, function(e) {
+    return e[5].split("")[1];
+  });
+  // 測試用 待會記得刪掉
+  appendData(result);
+  $('html,body').animate({
+        scrollTop: $("#targetTable").offset().top},
+        'slow');
 });
 
 
