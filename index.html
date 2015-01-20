@@ -7,77 +7,82 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="container">
-    <header class="shadow">
-      <h2>
-        <a href="#">NCCU 選課查詢好棒棒</a>
-      </h2>
-    </header>
-    <section class="well shadow">
-      <div class="row">
-    <div class="col-xs-6 col-xs-offset-2">
-      <h3>使用說明</h3> 
-      <ol>
-        <li>輸入你要搜尋的條件（本陽春網站只提供簡單的比對，如輸入統計學=>你得到數理統計學）</li>
-        <li>按下enter或者選擇送出鍵</li>
-        <li>往下滑一下，你要找的課出來囉！<a href="#targetTable">表格在這裡</a></li>
-        <li>
-          如果有Bug的話，來
-          <a href="https://www.facebook.com/denny.ku1/posts/796348323751958?notif_t=like">
-            這裏
-          </a>告訴我，希望NCCU爭氣一點能讓我來不及修
-        </li>
-        <li>
-          這只是個簡單的小東西，希望能幫助到需要的人囉！
-        </li>
-        <li>
-          第一階段初選延長到104/1/22 17：00，
-        </li>
-        <li>
-          選課系統可以用了，點<a href="http://wa.nccu.edu.tw/QryTor/">這裡</a>
-        </li>
-      </ol>
+    <div class="row">
+      <div class="col-md-6">
+        <header class="shadow">
+          <h2>
+          <a href="#">NCCU 選課查詢好棒棒</a>
+          </h2>
+        </header>
+        <section class="well shadow">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>使用說明</h3>
+              <ol>
+                <li>輸入你要搜尋的條件（本陽春網站只提供簡單的比對，如輸入統計學=>你得到數理統計學）</li>
+                <li>按下enter或者選擇送出鍵</li>
+                <li>往下滑一下，你要找的課出來囉！<a href="#targetTable">表格在這裡</a></li>
+                <li>
+                  如果有Bug的話，來
+                  <a href="https://www.facebook.com/denny.ku1/posts/796348323751958?notif_t=like">
+                    這裏
+                  </a>告訴我，希望NCCU爭氣一點能讓我來不及修
+                </li>
+                <li>
+                  這只是個簡單的小東西，希望能幫助到需要的人囉！
+                </li>
+                <li>
+                  第一階段初選延長到104/1/22 17：00，
+                </li>
+                <li>
+                  選課系統可以用了，點<a href="http://wa.nccu.edu.tw/QryTor/">這裡</a>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="search col-md-6">
+        <div class="row">
+          <div class="className form-group col-xs-6 col-xs-offset-2">
+            <label for="className" >科目中文名稱</label>
+            <input type="text" name="className" id="className" placeholder="請輸入科目名稱" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="className form-group col-xs-6 col-xs-offset-2">
+            <label for="className" >開課系級/體育/軍訓</label>
+            <input type="text" name="classification" id="classification" placeholder="請輸入體育、軍訓，或是開課系級，例：經濟、日文" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="timeClassificationContainer form-group col-xs-6 col-xs-offset-2">
+            <label for="timeClassification">開課時間</label>
+            <input type="text" placeholder="例：四CD，英文請用大寫" id="timeClassification" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="pointContainer form-group col-xs-6 col-xs-offset-2">
+            <label for="point">學分數</label>
+            <input type="number" for="point" id="point" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="proNameContainer form-group col-xs-6 col-xs-offset-2">
+            <label for="proName"> 教授名稱</label>
+            <input type="proName" for="proName" id="proName" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-xs-offset-2 ">
+            <button class="searchBtn btn btn-default">
+            送出
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    </section>
-    <div class="search">
-      <div class="row">
-        <div class="className form-group col-xs-6 col-xs-offset-2">
-          <label for="className" >科目中文名稱</label>
-          <input type="text" name="className" id="className" placeholder="請輸入科目名稱" class="form-control">
-        </div>
-      </div>
-      <div class="row">
-        <div class="className form-group col-xs-6 col-xs-offset-2">
-          <label for="className" >開課系級/體育/軍訓</label>
-          <input type="text" name="classification" id="classification" placeholder="請輸入體育、軍訓，或是開課系級，例：經濟、日文" class="form-control">
-        </div>
-      </div>
-      <div class="row">
-        <div class="timeClassificationContainer form-group col-xs-6 col-xs-offset-2">
-          <label for="timeClassification">開課時間</label>
-          <input type="text" placeholder="例：四CD，英文請用大寫" id="timeClassification" class="form-control">
-        </div>
-      </div>
-      <div class="row">
-        <div class="pointContainer form-group col-xs-6 col-xs-offset-2">
-          <label for="point">學分數</label>
-          <input type="number" for="point" id="point" class="form-control">
-        </div>
-      </div>
-      <div class="row">
-        <div class="proNameContainer form-group col-xs-6 col-xs-offset-2">
-          <label for="proName"> 教授名稱</label>
-          <input type="proName" for="proName" id="proName" class="form-control">
-        </div>
-      </div>
-      <div class="row">
-      <div class="col-xs-6 col-xs-offset-2 ">
-        <button class="searchBtn btn btn-default">
-          送出
-        </button>  
-      </div>
-    </div>
-    </div>
+    
     
     <div class="result">
       <table class="table table-hover table-striped" id="targetTable">
@@ -103,7 +108,7 @@
     <footer class="">
       <ul>
         <li>
-          <a href="./about.html">About this page</a>    
+          <a href="./about.html">About this page</a>
         </li>
         <li>
           <a href="">Special thanks: 葉顆顆</a>
@@ -115,16 +120,15 @@
       
     </footer>
   </body>
-<script>
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-56486769-2', 'auto');
   ga('send', 'pageview');
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="./underscore.js"></script>
-<script src="./script.js"></script>
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="./underscore.js"></script>
+  <script src="./script.js"></script>
 </html>
