@@ -3286,7 +3286,6 @@ function appendData(data) {
         if(item =="＠異動資訊Information of alteration:N/A"){
           $("." + d[0]).append("<td>" + "無" + "</td>")  
         } else{
-
           $("." + d[0]).append("<td>" + item.split('').slice(31).join('') + "</td>")  
         }
       } else if(i==11){
@@ -3334,12 +3333,15 @@ function validationFilter(filter, data) {
         };
         d[0] = ins.join('')+d[0];
     } 
-    url = ["http://newdoc.nccu.edu.tw/teaschm/1032/set00.jsp-yy=103&smt=2&num=","&gop=","&s=","&willtpe=0.htm"]
+    if (d.length<12) {
+      url = ["http://newdoc.nccu.edu.tw/teaschm/1032/set00.jsp-yy=103&smt=2&num=","&gop=","&s=","&willtpe=0.htm"]
     firstPart =d[0].substr(0,6);
     secondPart=d[0].substr(6,2);
     lastPart = d[0].substr(8,1);
     str = url[0]+firstPart+url[1]+secondPart+url[2]+lastPart+url[3];
-    d.push(str);
+    d.push(str);  
+    };
+    
   });
   return tmp;
 }
