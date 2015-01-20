@@ -3197,34 +3197,15 @@ var courses = [
   ["993026001", "2", "中醫與現代生活", "詳備註", "遠距通識", "四12", "群", "中文", "否", "＠異動資訊Information of alteration:N/A", "＠備註Note:上課時間提早為8:00~9:50(配合主播學校陽明大學)，同步遠距教學課程，由賴榮年老師授課。開放本校選課人數50人，選課餘額加簽以大四優先，欲加簽人數超過上限時以抽籤決定。"]
 ];
 
-// d3.select("button").on("click", function() {
-//   d3.csv('class.csv', function(d) {
-//     var data = d,
-//       filter = {
-//         className: "",
-//         classification: ""
-//       };
-//     classifications = [];
-//     filter.className = $("input").val();
-//     for (var i = data.length - 1; i >= 0; i--) {
-//       classifications.push(data[i]["開課系級"]);
-//     }
-//     classifications = _.uniq(classifications);
-//     console.log(classifications);
-//     console.log(classifications.length);
-//     console.log(data[0]["開課系級"]);
-//     console.log(filter);
-//   });
-// });
 
-var classifications = [];
-_.each(courses, function(d) {
-  d = d[4].split("");
-  cl = classify(d);
-  classifications.push(cl);
-});
-classifications = _.uniq(classifications);
-console.log(classifications);
+// var classifications = [];
+// _.each(courses, function(d) {
+//   d = d[4].split("");
+//   cl = classify(d);
+//   classifications.push(cl);
+// });
+// classifications = _.uniq(classifications);
+
 // for (var i = 0; i <classifications.length; i++) {
 //   d= classifications[i];
 //   $("#classification").append("<option value='"+d+"'>"+d+"</option>");
@@ -3252,19 +3233,21 @@ $('html,body').animate({
 });
 
 $(document).keypress(function(e) {
+  if(e.which == 13) {
     if ($('.result-row').length > 0) {
     $('.result-row').remove();
   };
   setFilter(filter);
   result = validationFilter(filter, courses);
-  result = _.sortBy(result, function(e) {
-    return e[5].split("")[1];
+  result = _.sortBy(result, function(d) {
+    return d[5].split("")[1];
   });
   // 測試用 待會記得刪掉
   appendData(result);
   $('html,body').animate({
         scrollTop: $("#targetTable").offset().top},
         'slow');
+  }
 });
 
 
@@ -3385,21 +3368,6 @@ function validateClassName(filter, item) {
   else {
     flag= false;
   }
-  //  if (_.intersection(target, data) == 0) {
-  //   flag = false;
-  // }else if(target.join("") == data.join("")){
-  //   flag = true;
-  // } else if ((data.length) <= 4) {
-  //   if (interLength / target.length>= 0.5) {
-  //     flag = true;
-  //   };
-  // } else if (interLength / (data.length - target.length)>=0.5) {
-  //   flag = true;
-  // } else {
-  //   if ((interLength / data.length) > 0.5) {
-  //     flag = true;
-  //   };
-  // }
   if (flag) {
     return true;
   } else {
