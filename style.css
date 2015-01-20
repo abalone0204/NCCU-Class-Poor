@@ -85,7 +85,7 @@ footer a:visited{
 th:nth-of-type(2){
   width: 6%;
 }
-th:nth-of-type(11){
+th:nth-of-type(11),th:nth-of-type(12){
   width: 10%;
 }
 
