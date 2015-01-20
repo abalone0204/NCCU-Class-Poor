@@ -3215,40 +3215,33 @@ var filter = [],
   times;
 
 
-$("button").click(function() {
-  if ($('.result-row').length > 0) {
-    $('.result-row').remove();
-  };
-  setFilter(filter);
-  result = validationFilter(filter, courses);
-  result = _.sortBy(result, function(e) {
-    return e[5].split("")[1];
-  });
-  // 測試用 待會記得刪掉
-  appendData(result);
-  $("#targetTable").trigger("click");
-$('html,body').animate({
-        scrollTop: $("#targetTable").offset().top},
-        'slow');
-});
+$("button").click(mainFunc);
 
 $(document).keypress(function(e) {
   if(e.which == 13) {
-    if ($('.result-row').length > 0) {
-    $('.result-row').remove();
-  };
-  setFilter(filter);
-  result = validationFilter(filter, courses);
-  result = _.sortBy(result, function(d) {
-    return d[5].split("")[1];
-  });
-  // 測試用 待會記得刪掉
-  appendData(result);
-  $('html,body').animate({
-        scrollTop: $("#targetTable").offset().top},
-        'slow');
+    mainFunc();
   }
 });
+
+function mainFunc(){
+  if ($('.result-row').length > 0) {
+      $('.result-row').remove();
+    };
+    setFilter(filter);
+    result = validationFilter(filter, courses);
+    result = _.sortBy(result, function(d) {
+      return d[5].split("")[1];
+    });
+    result = _.sortBy(result, function(d) {
+      return d[2].split("").length;
+    });
+    
+    // 測試用 待會記得刪掉
+    appendData(result);
+    $('html,body').animate({
+        scrollTop: $("#targetTable").offset().top},
+        'slow');
+}
 
 
 
@@ -3293,9 +3286,21 @@ function appendData(data) {
         if(item =="＠異動資訊Information of alteration:N/A"){
           $("." + d[0]).append("<td>" + "無" + "</td>")  
         } else{
+
           $("." + d[0]).append("<td>" + item.split('').slice(31).join('') + "</td>")  
         }
-      } else{
+      } else if(i==0){
+          if (item.split('').length<9) {
+            t = 9-item.split('').length;
+            ins = []
+            for (var i = 0; i <t; i++) {
+              ins.push(0);
+            };
+            $("." + d[0]).append("<td>" + ins.join('')+item + "</td>");
+          }else{
+            $("." + d[0]).append("<td>" + item + "</td>");
+          }
+      }else{
         $("." + d[0]).append("<td>" + item + "</td>")  
       };
       
@@ -3361,7 +3366,7 @@ function validateClassName(filter, item) {
       flag=true;
     };
   } else if(data.length>=5){
-    if (interLength >=3) {
+    if (interLength/target.length >0.5) {
       flag=true;  
     };
   }
