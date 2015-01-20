@@ -3237,19 +3237,26 @@ function mainFunc(){
       $('.result-row').remove();
     };
     setFilter(filter);
-    result = validationFilter(filter, courses);
-    result = _.sortBy(result, function(d) {
-      return d[5].split("")[1];
-    });
-    result = _.sortBy(result, function(d) {
-      return d[2].split("").length;
-    });
+    if (_.values(filter).length != 0) {
+      if(filter[1] < 0){
+        $("#point").attr("placeholder", "你是想要被當嗎？哪來的負學分")
+      }else{
+        result = validationFilter(filter, courses);
+
+      result = _.sortBy(result, function(d) {
+        return d[5].split("")[1];
+      });
+      result = _.sortBy(result, function(d) {
+        return d[2].split("").length;
+      });
     
-    // 測試用 待會記得刪掉
-    appendData(result);
-    $('html,body').animate({
+      // 測試用 待會記得刪掉
+      appendData(result);
+      $('html,body').animate({
         scrollTop: $("#targetTable").offset().top},
         'slow');
+      };
+  }
 }
 
 
