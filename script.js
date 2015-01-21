@@ -3353,6 +3353,7 @@ function validationFilter(filter, data) {
       filter[2] =reset;
       filter[4]=resetClassification;
     }
+    d[7] = placeHolder;
   });
   _.each(tmp, function(d){
     if (d[0].split('').length<9) {
