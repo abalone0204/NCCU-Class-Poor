@@ -24,6 +24,9 @@ $(document).keypress(function(e) {
 
 
 function mainFunc() {
+  clearMessage();
+  $(".pagination-bar ul li").remove();
+
   if ($('.result-row').length > 0) {
     $('.result-row').remove();
   }
@@ -40,12 +43,10 @@ function mainFunc() {
       result = _.sortBy(result, function(d) {
         return d[2].split("").length;
       });
-
-      // 測試用 待會記得刪掉
       if (result.length <= perPage) {
         appendData(result);
       } else {
-        tableHintMessage("你輸入的資料大於" + perPage + "筆，為了防止眼花，幫你做了分頁", "請不要擔心，點分頁不會讓你的搜尋不見");
+        tableHintMessage("查詢的結果大於" + perPage + "筆，為了防止眼花，幫你做了分頁", "請不要擔心，點分頁不會讓你的搜尋不見");
         pagination(result);
       }
 
@@ -66,30 +67,31 @@ function mainFunc() {
 var chineseNumber = ["一", "二", "三", "四", "甲", "乙", "丙"];
 
 function hintMessage(message) {
-  $(".hint-messages p").remove();
   if (typeof(message) == "string") {
     $(".hint-messages").append("<p>" + message + "</p>");
+
   }
 }
 
-function tableHintMessage(message, message2){
+function clearMessage() {
+  $(".hint-messages p").remove();
   $(".table-hint-messages p").remove();
+}
+
+function tableHintMessage(message, message2) {
   $(".table-hint-messages").append("<p>" + message + "</p>");
   $(".table-hint-messages").append("<p>" + message2 + "</p>");
 }
-function appendPaginationBar(pageCount){
+
+function appendPaginationBar(pageCount) {
   $(".pagination-bar ul li").remove();
-  for(var key = 0; key< pageCount; key++){
+  for (var key = 0; key < pageCount; key++) {
     if (key == 0) {
-      $(".pagination-bar ul").append("<li><a href='' class='active' data-page='"+key+"'>"+(key+1)+"</a></li>");
-    } else{
-      $(".pagination-bar ul").append("<li><a href='' data-page='"+key+"'>"+(key+1)+"</a></li>");
+      $(".pagination-bar ul").append("<li><a href='' class='active' data-page='" + key + "'>" + (key + 1) + "</a></li>");
+    } else {
+      $(".pagination-bar ul").append("<li><a href='' data-page='" + key + "'>" + (key + 1) + "</a></li>");
     }
   }
-
-}
-
-function appendNthPage(key,data){
 
 }
 
@@ -99,7 +101,7 @@ function pagination(result) {
     paginations.push(result.slice(i * perPage, (i + 1) * perPage));
   }
   appendPaginationBar(total);
-  $(".pagination-bar ul a").on("click", function(e){
+  $(".pagination-bar ul a").on("click", function(e) {
     e.preventDefault();
     $this = $(this);
     key = $this.data("page");
@@ -143,23 +145,23 @@ function appendData(data) {
     _.map(d, function(item, i) {
       if (i == 10) {
         if (item == "＠備註Note:N/A") {
-          $("." + d[0]).append("<td>" + "無" + "</td>")
+          $("." + d[0]).append("<td>" + "無" + "</td>");
         } else {
-          $("." + d[0]).append("<td>" + "<a href='' class='showNote' data-note='" + item + "'>備註</a>" + "</td>")
+          $("." + d[0]).append("<td>" + "<a href='' class='showNote' data-note='" + item + "'>備註</a>" + "</td>");
 
-        };
+        }
       } else if (i == 9) {
         if (item == "＠異動資訊Information of alteration:N/A") {
-          $("." + d[0]).append("<td>" + "無" + "</td>")
+          $("." + d[0]).append("<td>" + "無" + "</td>");
         } else {
-          $("." + d[0]).append("<td>" + item.split('').slice(31).join('') + "</td>")
+          $("." + d[0]).append("<td>" + item.split('').slice(31).join('') + "</td>");
         }
       } else if (i == 11) {
 
-        $("." + d[0]).append("<td>" + "<a href='" + item + "' target='_blank'>選課大綱</a>" + "</td>")
+        $("." + d[0]).append("<td>" + "<a href='" + item + "' target='_blank'>選課大綱</a>" + "</td>");
       } else {
         $("." + d[0]).append("<td>" + item + "</td>");
-      };
+      }
 
     });
   });
@@ -249,22 +251,22 @@ function validateClassName(filter, item) {
     data = item[2].split(""),
     flag;
   interLength = parseFloat(_.intersection(target, data).length);
-  if (_.intersection(target, data) == 0) {
+  if (_.intersection(target, data) === 0) {
     flag = false;
   } else if (target.join("") == data.join("")) {
     flag = true;
   } else if (target.length > data.length) {
     if (interLength / target.length > 0.5) {
       flag = true;
-    };
+    }
   } else if ((data.length - target.length) <= target.length) {
     if (interLength == target.length) {
       flag = true;
-    };
+    }
   } else if (data.length >= 5) {
     if (interLength / target.length > 0.5) {
       flag = true;
-    };
+    }
   } else {
     flag = false;
   }
@@ -272,7 +274,7 @@ function validateClassName(filter, item) {
     return true;
   } else {
     return false;
-  };
+  }
 }
 
 function validateTime(filter, item) {
@@ -284,5 +286,5 @@ function validateTime(filter, item) {
     } else {
       return false;
     }
-  };
+  }
 }

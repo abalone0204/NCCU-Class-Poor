@@ -112,7 +112,7 @@ td a,ol li a:hover:after{
 .table-hint-messages,.hint-messages {
   padding-top: 2rem;
   text-align: center !important;
-  color: green;
+  color: tomato;
 }
 
 /* Pagination */
