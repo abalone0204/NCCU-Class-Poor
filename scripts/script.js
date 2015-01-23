@@ -146,25 +146,32 @@ function appendData(data) {
   $(".result-row").remove();
   _.each(data, function(d) {
     $(".resultTable").append("<tr class='" + d[0] + " result-row'></tr>");
+    var $container = $("."+d[0]);
     _.map(d, function(item, i) {
-      if (i == 10) {
+      if (i == 11) {
         if (item == "＠備註Note:N/A") {
-          $("." + d[0]).append("<td>" + "無" + "</td>");
+          $container.append("<td>" + "無" + "</td>");
         } else {
-          $("." + d[0]).append("<td>" + "<a href='' class='showNote' data-note='" + item + "'>備註</a>" + "</td>");
-
+          $container.append("<td>" + "<a href='' class='showNote' data-note='" + item + "'>備註</a>" + "</td>");
         }
-      } else if (i == 9) {
+      } else if (i == 10) {
         if (item == "＠異動資訊Information of alteration:N/A") {
-          $("." + d[0]).append("<td>" + "無" + "</td>");
+          $container.append("<td>" + "無" + "</td>");
         } else {
-          $("." + d[0]).append("<td>" + item.split('').slice(31).join('') + "</td>");
+          $container.append("<td>" + item.split('').slice(31).join('') + "</td>");
         }
-      } else if (i == 11) {
+      } else if (i ==12) {
+        // 選課大綱要修改的部分
+        agendaParis = _.pairs(item);
 
-        $("." + d[0]).append("<td>" + "<a href='" + item + "' target='_blank'>選課大綱</a>" + "</td>");
+          keyName=agendaParis[0][0];
+          link = agendaParis[0][1];
+          $container.append("<td><a href='"+link+"'>"+keyName+"</a></td>");
+         
+         
+        
       } else {
-        $("." + d[0]).append("<td>" + item + "</td>");
+        $container.append("<td>" + item + "</td>");
       }
 
     });
@@ -202,40 +209,15 @@ function validationFilter(filter, data) {
         }
       }
     }
-    placeHolder = d[7];
-    d[7] = "xxxx";
+    placeHolder = d[8];
+    d[8] = "xxxx";
     if (_.intersection(_.compact(filter), d).length == _.compact(filter).length) {
-      d[7] = placeHolder;
+      d[8] = placeHolder;
       tmp.push(d);
       filter[2] = reset;
       filter[4] = resetClassification;
     }
-    d[7] = placeHolder;
-  });
-  _.each(tmp, function(d) {
-    if (d[0].split('').length < 9) {
-      t = 9 - d[0].split('').length;
-      ins = [];
-      for (var i = 0; i < t; i++) {
-        ins.push(0);
-      }
-      d[0] = ins.join('') + d[0];
-    }
-    if (d.length < 12) {
-      // 處理課程大綱
-      var url = ["http://newdoc.nccu.edu.tw/teaschm/1032/set00.jsp-yy=103&smt=2&num=", "&gop=", "&s=", "&willtpe=", ".htm"],
-      firstPart = d[0].substr(0, 6),
-      secondPart = d[0].substr(6, 2);
-      lastPart = d[0].substr(8, 1);
-      if (d[2] == "資料處理" || d[2] == "軟體應用導論") {
-        wiltpe = "1";
-      } else {
-        wiltpe = "0";
-      }
-      str = url[0] + firstPart + url[1] + secondPart + url[2] + lastPart + url[3] + wiltpe + url[4];
-      d.push(str);
-    }
-
+    d[8] = placeHolder;
   });
   return tmp;
 }
