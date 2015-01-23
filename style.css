@@ -107,4 +107,9 @@ td a,ol li a:hover:after{
   animation:none;
   color: black !important;
 }
+/* Hint */
 
+.hint-messages {
+  padding-top: 2rem;
+  text-align: center !important;
+}
