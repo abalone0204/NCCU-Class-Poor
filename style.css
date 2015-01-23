@@ -116,20 +116,32 @@ td a,ol li a:hover:after{
 }
 
 /* Pagination */
-.pagination-ba li{
-  border: black solid 1px;
+.pagination-bar li{
+  text-align: center;
+  margin: 2rem !important;
+  padding: 2rem 1rem;
+  
 }
 .pagination-bar a{
-  width: 2rem;
+  display: inline-block;
+  padding: 2rem;
   color: blue !important;
 }
 
-
+/*記得讓pagination 的a padding 變大*/
 .pagination-bar a:hover:after{
   content: none !important;
 }
+.pagination-bar a:hover{
+  border-bottom: solid 1px blue;
+}
 
 a.active {
+
   cursor: default;
   color: black !important;
+}
+
+a.active:hover{
+  border: none;
 }
