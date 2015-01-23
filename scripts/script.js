@@ -197,7 +197,7 @@ function validationFilter(filter, data) {
           filter[4] = d[4];
         }
       }
-    };
+    }
     placeHolder = d[7];
     d[7] = "xxxx";
     if (_.intersection(_.compact(filter), d).length == _.compact(filter).length) {
@@ -211,16 +211,16 @@ function validationFilter(filter, data) {
   _.each(tmp, function(d) {
     if (d[0].split('').length < 9) {
       t = 9 - d[0].split('').length;
-      ins = []
+      ins = [];
       for (var i = 0; i < t; i++) {
         ins.push(0);
-      };
+      }
       d[0] = ins.join('') + d[0];
     }
     if (d.length < 12) {
       // 處理課程大綱
-      url = ["http://newdoc.nccu.edu.tw/teaschm/1032/set00.jsp-yy=103&smt=2&num=", "&gop=", "&s=", "&willtpe=", ".htm"]
-      firstPart = d[0].substr(0, 6);
+      var url = ["http://newdoc.nccu.edu.tw/teaschm/1032/set00.jsp-yy=103&smt=2&num=", "&gop=", "&s=", "&willtpe=", ".htm"],
+      firstPart = d[0].substr(0, 6),
       secondPart = d[0].substr(6, 2);
       lastPart = d[0].substr(8, 1);
       if (d[2] == "資料處理" || d[2] == "軟體應用導論") {
@@ -230,7 +230,7 @@ function validationFilter(filter, data) {
       }
       str = url[0] + firstPart + url[1] + secondPart + url[2] + lastPart + url[3] + wiltpe + url[4];
       d.push(str);
-    };
+    }
 
   });
   return tmp;
