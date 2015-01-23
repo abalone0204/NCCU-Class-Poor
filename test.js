@@ -5,35 +5,36 @@ var readline = require('readline');
 var stream = require('stream');
 var split = require('split');
 var through = require('through');
+var writeFilePath = '/Users/kudenny/side_projects/class/sample.js';
 
 var data = require("./scripts/raw_data/raw_data_01_23.js").data;
 // console.log(data);
 cleanSpace(data);
-_.each(data, function(d){
-    d[3] ="";
-    d[5] = "";
-    d[8]= "";
-    if (d[15]) {
-        d[15] = setUrlObj(d[15]);
+for(var i =0; i< data.length; i++){
+    data[i][0] = data[i][0].toString();
+    data[i][1] = data[i][1].toString();
+    data[i][3] = "";
+    data[i][3] ="";
+    data[i][5] = "";
+    data[i][8]= "";
+    if (data[i][15]) {
+        data[i][15] = setUrlObj(data[i][15]);
     }
-    if (d[16]) {
-        d[16] = setUrlObj(d[16]);   
+    if (data[i][16]) {
+        data[i][16] = setUrlObj(data[i][16]);   
     }
-    if (d[17]) {
-        d[17] = setUrlObj(d[17]);   
+    if (data[i][17]) {
+        data[i][17] = setUrlObj(data[i][17]);   
     }
+    data[i] =_.compact(data[i]);
+}
 
-    d = _.compact(d);
-});
+var jsonResult= JSON.stringify(data);
+// console.log(jsonResult);
+writefile("cleanCourses=");
+fs.appendFile(writeFilePath, jsonResult);
+fs.appendFile(writeFilePath, ";");
 
-result = [];
-result.push(data);
-console.log(result);
-// writefile(result);
-// result = JSON.parse(data);
-// result=JSON.stringify(data);
-
-// writefile(result);
 
 function setUrlObj(rawData){
     var k = rawData.slice(rawData.length-6,rawData.length-2).toString();
@@ -56,14 +57,6 @@ function cleanSpace(data) {
 
 
 function writefile(result) {
-    var fileName = '/Users/kudenny/side_projects/class/sample.js';
 
-    fs.writeFileSync(fileName, result, function(err) {
-        if (err) {
-            console.log("ERROR:");
-            console.log(err);
-        } else {
-            console.log("The file was saved!");
-        }
-    });
+    fs.writeFileSync(writeFilePath, result);
 }
