@@ -109,7 +109,27 @@ td a,ol li a:hover:after{
 }
 /* Hint */
 
-.hint-messages {
+.table-hint-messages,.hint-messages {
   padding-top: 2rem;
   text-align: center !important;
+  color: green;
+}
+
+/* Pagination */
+.pagination-ba li{
+  border: black solid 1px;
+}
+.pagination-bar a{
+  width: 2rem;
+  color: blue !important;
+}
+
+
+.pagination-bar a:hover:after{
+  content: none !important;
+}
+
+a.active {
+  cursor: default;
+  color: black !important;
 }
