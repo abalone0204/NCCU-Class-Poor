@@ -49,11 +49,7 @@ function mainFunc() {
         tableHintMessage("查詢的結果大於" + perPage + "筆，為了防止眼花，幫你做了分頁", "請不要擔心，點分頁不會讓你的搜尋不見");
         pagination(result);
       }
-
-      $('html,body').animate({
-          scrollTop: $(".table-hint-messages").offset().top
-        },
-        'slow');
+      forcusOnTable();
     }
     // 分頁功能
   } else {
@@ -65,6 +61,13 @@ function mainFunc() {
 
 
 var chineseNumber = ["一", "二", "三", "四", "甲", "乙", "丙"];
+function forcusOnTable(){
+        $('html,body').animate({
+          scrollTop: $(".table-hint-messages").offset().top
+        },
+        'slow');
+}
+
 
 function hintMessage(message) {
   if (typeof(message) == "string") {
@@ -109,6 +112,7 @@ function pagination(result) {
       $(".pagination-bar ul a").removeClass("active");
       $(this).addClass("active");
       appendData(paginations[key]);
+      forcusOnTable();
     }
 
   });
