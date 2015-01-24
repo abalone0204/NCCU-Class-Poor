@@ -49,7 +49,9 @@ a:hover:after{
     animation: blink 0.8s linear 0.1s infinite ; /* Standard syntax */
 }
 .shadow{
-  box-shadow: 5px 5px 20px #888888;
+  -webkit-transition: box-shadow 0.5s; /* Safari 3.1 to 6.0 */
+  transition: box-shadow 0.5s;
+  box-shadow: 5px 5px 10px #888888;
 }
 
 header a{
@@ -125,8 +127,9 @@ td a,ol li a:hover:after{
   
 }
 .pagination-bar a{
+  /*border-radius: 100%;*/
   display: inline-block;
-  padding: 2rem;
+  padding: 1rem 1.5rem;
   color: blue !important;
 }
 
@@ -135,13 +138,16 @@ td a,ol li a:hover:after{
   content: none !important;
 }
 .pagination-bar a:hover{
-  border-bottom: solid 1px blue;
+  /*border-bottom: solid 1px blue;*/
 }
 
 a.active {
+  -webkit-transition: background 2s; /* Safari 3.1 to 6.0 */
+  transition: background 2s;
 
+  background: #888;
   cursor: default;
-  color: black !important;
+  color: white !important;
 }
 
 a.active:hover{
