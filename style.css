@@ -84,15 +84,17 @@ footer a:visited{
 
 
 /* th-width setting */
-th:nth-of-type(3),th:nth-of-type(10),th:nth-of-type(2){
+/*th:nth-of-type(3),th:nth-of-type(10),th:nth-of-type(2){
   width: 6%;
 }
 
 
 th:nth-of-type(11),th:nth-of-type(12){
   width: 10%;
+}*/
+th,td{
+  text-align: center !important;
 }
-
 td a,ol li a{
   color: blue !important;
 }
@@ -144,4 +146,8 @@ a.active {
 
 a.active:hover{
   border: none;
+}
+
+td a:hover:after{
+  content: none !important;
 }

@@ -20,6 +20,9 @@ var test = [];
 cleanSpace(data);
 for (var i = 0; i < data.length; i++) {
     data[i][0] = data[i][0].toString();
+    if (i ===1 ) {
+        console.log(data[i]);
+    }
     if (data[i][0].length < 9) {
         t = 9 - data[i][0].split('').length;
         ins = [];
@@ -28,25 +31,58 @@ for (var i = 0; i < data.length; i++) {
         }
         data[i][0] = ins.join('') + data[i][0];
     }
+
     data[i][1] = data[i][1].toString();
-    data[i][3] = "";
-    data[i][3] = "";
-    data[i][5] = "";
-    data[i][8] = "";
     objHolder = [];
-    for(k = 9; k<data[i].length; k++){
-        if (data[i][k].substr(0,10) =="=HYPERLINK") {
+    for (var k = 2; k < data[i].length; k++) {
+        if (data[i][k].substr(0, 10) == "=HYPERLINK") {
             objHolder.push(setUrlObj(data[i][k]));
             data[i][k] = '';
-        }
+        } else if (isEngDate(data[i][k])) {
+            data[i][k] = '';
+        } else if (data[i][k].match(/^[A-Za-z].*/) !== null) {
+            // Ref. Note NA還有UNIX是例外
+            if (data[i][k] !== "UNIX系統程式設計") {
+                data[i][k] = '';
+            }
+        } else if(data[i][k] == '3D game programming' || data[i][k] =='19th Century English Literature'|| data[i][k] =='20th Century English Literature'){
+            data[i][k] = '';
+        } 
+        data[i][k] = data[i][k].replace('＠備註Note:', '');
+        data[i][k] = data[i][k].replace('＠異動資訊Information of alteration:', '');
     }
-    data[i] = _.compact(data[i]);   
-    data[i].push(objHolder)
+
+
+    data[i] = _.compact(data[i]);
+    data[i].push(objHolder);
+    if (data[i].length<13) {
+        data[i].splice(6, 0, '暫缺資料');
+    }
 
 }
 
-test = _.uniq(test);
-console.log(test);
+
+num = [];
+test = {
+    11: [],
+    12: [],
+    13: [],
+    14: [],
+    15: []
+};
+console.log(data[0].length);
+
+_.each(data, function(d) {
+    num.push(d.length);
+    test[d.length].push(d);
+});
+
+console.log(test[12]);
+console.log(test[12].length);
+num = _.uniq(num);
+console.log(num);
+
+
 
 var jsonResult = JSON.stringify(data);
 // console.log(jsonResult);
@@ -56,14 +92,12 @@ fs.appendFile(writeFilePath, ";");
 
 
 function setUrlObj(rawData) {
-    var k = rawData.slice(rawData.length - 6, rawData.length - 2).toString();
-    if (k != "教學大綱" || k!= "系所設定") {
-        k = rawData.replace(')"','').match(/\].+\)/)[0].replace(']','')
-        url = rawData.replace('=HYPERLINK("[', '').replace(/\].+\(.+\)/, '')
-    } else{
-        url = rawData.replace('=HYPERLINK("[', '').replace(']' + k + '")', '');    
-    };
-    
+    var k = rawData.replace(')"', '').match(/\].+\)/)[0].replace(']', '');
+    if (k.match(/\"/) !== null) {
+        k = k.replace('")', '');
+    }
+    url = rawData.match(/http.+\.htm/)[0];
+
     rawData = {};
     // 測試用
     test.push(k);
@@ -84,6 +118,13 @@ function cleanSpace(data) {
     });
 }
 
+function isEngDate(date) {
+    if (date.match(/^mon.+/) !== null || date.match(/^tue.+/) !== null || date.match(/^wed.+/) !== null || date.match(/^thu.+/) !== null || date.match(/^fri.+/) !== null || date.match(/^sat.+/) !== null || date.match(/^sat.+/) !== null) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function writefile(result) {
 

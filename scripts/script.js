@@ -61,11 +61,12 @@ function mainFunc() {
 
 
 var chineseNumber = ["一", "二", "三", "四", "甲", "乙", "丙"];
-function forcusOnTable(){
-        $('html,body').animate({
-          scrollTop: $(".table-hint-messages").offset().top
-        },
-        'slow');
+
+function forcusOnTable() {
+  $('html,body').animate({
+      scrollTop: $(".table-hint-messages").offset().top
+    },
+    'slow');
 }
 
 
@@ -146,41 +147,62 @@ function appendData(data) {
   $(".result-row").remove();
   _.each(data, function(d) {
     $(".resultTable").append("<tr class='" + d[0] + " result-row'></tr>");
-    var $container = $("."+d[0]);
+    var $container = $("." + d[0]);
     _.map(d, function(item, i) {
       if (i == 11) {
-        if (item == "＠備註Note:N/A") {
-          $container.append("<td>" + "無" + "</td>");
+        if (item == "N/A") {
+          $container.append("<td></td>");
         } else {
-          $container.append("<td>" + "<a href='' class='showNote' data-note='" + item + "'>備註</a>" + "</td>");
+          $container.append("<td>" + "<a href='' class='toggleNote' data-label='備註' data-note='" + item + "'>備註</a>" + "</td>");
         }
       } else if (i == 10) {
-        if (item == "＠異動資訊Information of alteration:N/A") {
-          $container.append("<td>" + "無" + "</td>");
+        if (item == "N/A") {
+          $container.append("<td></td>");
         } else {
-          $container.append("<td>" + item.split('').slice(31).join('') + "</td>");
-        }
-      } else if (i ==12) {
-        // 選課大綱要修改的部分
-        agendaParis = _.pairs(item);
+          $container.append("<td>" + "<a href='' class='toggleNote' data-label='異動資訊' data-note='" + item + "'>異動資訊</a>" + "</td>");
 
-          keyName=agendaParis[0][0];
-          link = agendaParis[0][1];
-          $container.append("<td><a href='"+link+"'>"+keyName+"</a></td>");
-         
-         
-        
+        }
+      } else if (i == (d.length - 1)) {
+        // 選課大綱要修改的部分
+        agendaPairs = [];
+        for (var l = 0; l < item.length; l++) {
+          agendaPairs.push(_.pairs(item[l]));
+          // agendaPair = _.pairs(item[l]);
+        }
+        // console.log(agendaPair);
+        _.each(agendaPairs, function(agendaPair) {
+          _.each(agendaPair, function(agenda) {
+            console.log(agenda);
+            keyName = agenda[0];
+            link = agenda[1];
+            $container.append("<td><a href='" + link + "' target='_blank'>" + keyName + "</a></td>");
+          });
+
+        });
+
+
+
       } else {
         $container.append("<td>" + item + "</td>");
       }
 
     });
   });
-  $(".showNote").click(function(e) {
+  $(".toggleNote").on('click', function(e) {
     e.preventDefault();
     $this = $(this);
     data = $this.data("note");
-    $this.append("div").addClass("note-flash").text(data);
+    $this.data("note", $this.text());
+    $this.toggleClass("flash-note").text(data);
+    if ($this.text() !== $this.data("label")) {
+      $('html,body').animate({
+          scrollTop: $this.offset().top - 100
+        },
+        'slow');
+    }
+
+
+    console.log($this.offset().top);
   });
 }
 
