@@ -5,13 +5,7 @@ var filter = [],
   paginations = [],
   perPage = 20;
 
-_.each(courses, function(d) {
-  t = d[4].split("");
-  if (t[2] == "系") {
-    basicClassifications.push(t[0] + t[1]);
-  }
-});
-basicClassifications = _.uniq(basicClassifications);
+
 
 $("button").click(mainFunc);
 
@@ -21,16 +15,10 @@ $(document).keypress(function(e) {
   }
 });
 
-
+// Main
 
 function mainFunc() {
-  clearMessage();
-  $(".pagination-bar ul li").remove();
-
-  if ($('.result-row').length > 0) {
-    $('.result-row').remove();
-  }
-  setFilter(filter);
+  initAll();
   if (_.compact(filter).length != 0) {
     if (filter[1] < 0) {
       hintMessage("你是想要被當嗎？哪來的負學分");
@@ -58,9 +46,44 @@ function mainFunc() {
   }
 }
 
+// Init
+
+function initAll() {
+  clearMessage();
+  $(".pagination-bar ul li").remove();
+
+  if ($('.result-row').length > 0) {
+    $('.result-row').remove();
+  }
+  result = [];
+  paginations=[];
+  setBasicClassifications();
+  setFilter(filter);
+}
+
+function setBasicClassifications() {
+  _.each(courses, function(d) {
+    t = d[4].split("");
+    if (t[2] == "系") {
+      basicClassifications.push(t[0] + t[1]);
+    }
+  });
+  basicClassifications = _.uniq(basicClassifications);
+}
+
+function setFilter(filter) {
+  filter[1] = $("#point").val();
+  filter[2] = $("#className").val();
+  filter[3] = $("#proName").val();
+  filter[4] = $("#classification").val();
+  filter[5] = $("#timeClassification").val();
+
+  return filter;
+}
 
 
-var chineseNumber = ["一", "二", "三", "四", "甲", "乙", "丙"];
+
+// View
 
 function forcusOnTable() {
   $('html,body').animate({
@@ -111,48 +134,27 @@ function pagination(result) {
     key = $this.data("page");
     if (!$this.hasClass("active")) {
       $(".pagination-bar ul a").removeClass("active");
-      $("a[data-page='"+key+"']").addClass("active");
+      $("a[data-page='" + key + "']").addClass("active");
       appendData(paginations[key]);
       forcusOnTable();
     }
 
   });
-  $('.pagination-bar ul a').hover(function(){
+  $('.pagination-bar ul a').hover(function() {
     if (!$(this).hasClass("active")) {
       $(this).addClass("shadow");
     }
-  }, function(){
+  }, function() {
     $(this).removeClass("shadow");
   });
   appendData(paginations[0]);
 }
 
-function classify(name) {
-  if (name[2] == '系') {
-    return name[0] + name[1] + name[2];
-  }
-  if (_.contains(name, "碩") || _.contains(name, "博")) {
-    return name[0] + name[1] + "所";
-  } else if (name[0] == "地" && (testChinese(name))) {
-    return "地政系";
-  } else if (testChinese(name)) {
-    return name[0] + name[1] + '系';
-  } else {
-    return name.join("");
-  }
-}
-
-function testChinese(name) {
-  if (_.contains(name, "一") || _.contains(name, "二") || _.contains(name, "三") || _.contains(name, "四")) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 function appendData(data) {
-  var  maxNumOfTd = _.max(data, function(d){ return d[d.length-1].length;});
-  maxNumOfTd = maxNumOfTd[maxNumOfTd.length-1].length;
+  var maxNumOfTd = _.max(data, function(d) {
+    return d[d.length - 1].length;
+  });
+  maxNumOfTd = maxNumOfTd[maxNumOfTd.length - 1].length;
   console.log(maxNumOfTd);
   $(".result-row").remove();
   _.each(data, function(d) {
@@ -189,11 +191,10 @@ function appendData(data) {
         if (item.length !== maxNumOfTd) {
 
           r = maxNumOfTd - item.length;
-          for(var s=0; s< r; s++){
+          for (var s = 0; s < r; s++) {
             $container.append("<td></td>");
           }
         }
-        
 
 
 
@@ -220,21 +221,47 @@ function appendData(data) {
   });
 }
 
+// 
 
+
+function classify(name) {
+  if (name[2] == '系') {
+    return name[0] + name[1] + name[2];
+  }
+  if (_.contains(name, "碩") || _.contains(name, "博")) {
+    return name[0] + name[1] + "所";
+  } else if (name[0] == "地" && (testChinese(name))) {
+    return "地政系";
+  } else if (testChinese(name)) {
+    return name[0] + name[1] + '系';
+  } else {
+    return name.join("");
+  }
+}
+
+function testChinese(name) {
+  if (_.contains(name, "一") || _.contains(name, "二") || _.contains(name, "三") || _.contains(name, "四")) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function validationFilter(filter, data) {
   var tmp = [],
     reset, resetTime, resetClassification, resetTeacher;
   _.each(data, function(d) {
     if (filter[2]) {
-      if (validateClassName(filter, d)) {
+      filterString = '.*' + filter[2].split('').join('.{0,1}') + '.*';
+      rgxpClassName = new RegExp(filterString);
+      if (d[2].match(rgxpClassName) !== null) {
         reset = filter[2];
         filter[2] = d[2];
       }
     }
     if (filter[3]) {
-      var rg = new RegExp(filter[3]);
-      if (d[3].match(rg) !== null) {
+      var rgxpTeacher = new RegExp(filter[3]);
+      if (d[3].match(rgxpTeacher) !== null) {
         resetTeacher = d[3];
         filter[3] = d[3];
       }
@@ -254,30 +281,32 @@ function validationFilter(filter, data) {
         }
       }
     }
-    placeHolder = d[8];
-    d[8] = "xxxx";
-    if (_.intersection(_.compact(filter), d).length == _.compact(filter).length) {
-      d[8] = placeHolder;
+    // placeHolder = d[8];
+    // d[8] = "xxxx";
+    if (finalFilter(filter, d)) {
+      // d[8] = placeHolder;
       tmp.push(d);
       filter[2] = reset;
-      filter[3]= resetTeacher;
+      filter[3] = resetTeacher;
       filter[4] = resetClassification;
 
     }
-    d[8] = placeHolder;
+    // d[8] = placeHolder;
   });
   return tmp;
 }
 
-function setFilter(filter) {
-  filter[1] = $("#point").val();
-  filter[2] = $("#className").val();
-  filter[3] = $("#proName").val();
-  filter[4] = $("#classification").val();
-  filter[5] = $("#timeClassification").val();
-
-  return filter;
+function finalFilter(filter, dataSet){
+  flag = true;
+  for(var i =0 ;i<filter.length;i++){
+    if (filter[i] && (filter[i] !== dataSet[i])) {
+      flag = false;
+    }
+  }
+  return flag;
 }
+
+
 
 function validateClassName(filter, item) {
   var target = filter[2].split(""),
