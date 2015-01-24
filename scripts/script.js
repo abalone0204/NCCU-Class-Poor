@@ -111,7 +111,7 @@ function pagination(result) {
     key = $this.data("page");
     if (!$this.hasClass("active")) {
       $(".pagination-bar ul a").removeClass("active");
-      $(this).addClass("active");
+      $("a[data-page='"+key+"']").addClass("active");
       appendData(paginations[key]);
       forcusOnTable();
     }
