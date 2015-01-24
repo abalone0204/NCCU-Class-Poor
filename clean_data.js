@@ -21,7 +21,6 @@ cleanSpace(data);
 for (var i = 0; i < data.length; i++) {
     data[i][0] = data[i][0].toString();
     if (i ===1 ) {
-        console.log(data[i]);
     }
     if (data[i][0].length < 9) {
         t = 9 - data[i][0].split('').length;
@@ -42,7 +41,7 @@ for (var i = 0; i < data.length; i++) {
             data[i][k] = '';
         } else if (data[i][k].match(/^[A-Za-z].*/) !== null) {
             // Ref. Note NA還有UNIX是例外
-            if (data[i][k] !== "UNIX系統程式設計") {
+            if (data[i][k] !== "UNIX系統程式設計" && data[i][k] !== "SAS/R商業資料分析") {
                 data[i][k] = '';
             }
         } else if(data[i][k] == '3D game programming' || data[i][k] =='19th Century English Literature'|| data[i][k] =='20th Century English Literature'){
@@ -62,25 +61,25 @@ for (var i = 0; i < data.length; i++) {
 }
 
 
-num = [];
-test = {
-    11: [],
-    12: [],
-    13: [],
-    14: [],
-    15: []
-};
-console.log(data[0].length);
+// num = [];
+// test = {
+//     11: [],
+//     12: [],
+//     13: [],
+//     14: [],
+//     15: []
+// };
+// // console.log(data[0].length);
 
-_.each(data, function(d) {
-    num.push(d.length);
-    test[d.length].push(d);
-});
+// _.each(data, function(d) {
+//     num.push(d.length);
+//     test[d.length].push(d);
+// });
 
-console.log(test[12]);
-console.log(test[12].length);
-num = _.uniq(num);
-console.log(num);
+// console.log(test[12]);
+// console.log(test[12].length);
+// num = _.uniq(num);
+// console.log(num);
 
 
 

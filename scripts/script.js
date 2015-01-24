@@ -224,12 +224,19 @@ function appendData(data) {
 
 function validationFilter(filter, data) {
   var tmp = [],
-    reset, resetTime, resetClassification;
+    reset, resetTime, resetClassification, resetTeacher;
   _.each(data, function(d) {
     if (filter[2]) {
       if (validateClassName(filter, d)) {
         reset = filter[2];
         filter[2] = d[2];
+      }
+    }
+    if (filter[3]) {
+      var rg = new RegExp(filter[3]);
+      if (d[3].match(rg) !== null) {
+        resetTeacher = d[3];
+        filter[3] = d[3];
       }
     }
 
@@ -253,7 +260,9 @@ function validationFilter(filter, data) {
       d[8] = placeHolder;
       tmp.push(d);
       filter[2] = reset;
+      filter[3]= resetTeacher;
       filter[4] = resetClassification;
+
     }
     d[8] = placeHolder;
   });
