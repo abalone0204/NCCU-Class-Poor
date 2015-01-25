@@ -112,7 +112,6 @@ function hideTitle() {
       y: -100
     })
     .style({
-      'font-size': '12px',
       'fill': '#DDD'
     });
 }
