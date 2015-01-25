@@ -1,6 +1,6 @@
 
   var fill = d3.scale.category20(),
-    w = $('#textCloud').width(),
+    w = $('.search').width(),
     h = $('.search').height(),
     margin = {
       left: 15,
