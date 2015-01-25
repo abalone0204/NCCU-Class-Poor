@@ -8,15 +8,13 @@ var through = require('through');
 // node clear_data.js filename source_data
 var date = new Date(),
     timestamp = ['data-', 0, date.getMonth() + 1, '-', date.getDate()].join('');
-
+var test = [];
 var writeFilePath = './scripts/data/' + timestamp + '.js';
 console.log("Your clean data saved at " + writeFilePath);
 var rawDataPath = process.argv[2];
 console.log(rawDataPath);
 var data = require('./' + rawDataPath).data;
-// For test
-var test = [];
-// 
+
 cleanSpace(data);
 for (var i = 0; i < data.length; i++) {
     data[i][0] = data[i][0].toString();
@@ -59,75 +57,25 @@ for (var i = 0; i < data.length; i++) {
 
 }
 
+// 以下是測試區
+// var textTest = [];
 
-test = [];
-// num = [];
-// test = {
-//     11: [],
-//     12: [],
-//     13: [],
-//     14: [],
-//     15: []
-// };
-// // console.log(data[0].length);
+// _.each(data, function(d){
+//     textTest.push(d[2]);
+// });
+// textTest = _.uniq(textTest);
+// console.log(textTest.length);
+// var jsonResult = JSON.stringify(textTest);
+// console.log(jsonResult);
+// writefile("var textCloudWords=");
+// fs.appendFile(writeFilePath, jsonResult);
+// fs.appendFile(writeFilePath, ";");
 
-_.each(data, function(d) {
-    test.push(d[6].replace(/\d+/, ''));
-});
-
-test = _.uniq(test);
-
-secStage = [];
-_.each(test, function(d) {
-    secStage.push(d.replace(/\d+/, ''));
-});
-secStage = _.uniq(secStage);
-
-stage3 = [];
-_.each(secStage, function(d) {
-    if (d.length == 2) {
-        stage3.push(d);
-    }
-});
-stage3 = _.uniq(stage3);
-// console.log(stage3);
-
-stage4 = [];
-
-_.each(secStage, function(d) {
-    flag = true;
-    _.each(stage3, function(t) {
-        regxp = new RegExp(t);
-        if (d.match(regxp) !== null) {
-            flag = false;
-        }
-    });
-    if (flag) {
-        stage4.push(d);
-    }
-
-});
-stage4 = _.uniq(stage4);
-// 要連接的 stag3 
-stage5 = [];
-_.each(stage4, function(d){
-    stage5.push(d.slice(0,2));
-});
-stage5 = _.uniq(stage5);
-console.log(test);
-// console.log(stage5);
-
-// console.log(secStage.length);
-// console.log(test[12]);
-// console.log(test[12].length);
-// num = _.uniq(num);
-// console.log(num);
-
-
+// 以上是測試區
 
 var jsonResult = JSON.stringify(data);
 // console.log(jsonResult);
-writefile("courses=");
+writefile("var courses=");
 fs.appendFile(writeFilePath, jsonResult);
 fs.appendFile(writeFilePath, ";");
 

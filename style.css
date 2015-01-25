@@ -157,3 +157,7 @@ a.active:hover{
 td a:hover:after{
   content: none !important;
 }
+
+svg text{
+  cursor: pointer;
+}

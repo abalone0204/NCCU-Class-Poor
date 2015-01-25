@@ -15,40 +15,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <header class="shadow">
-          <h2>
-          NCCU 選課查詢好棒棒
-          </h2>
-        </header>
-        <section class="well shadow">
-          <div class="row">
-            <div class="col-xs-12">
-              <h3>使用說明</h3>
-              <ol>
-                <li>輸入你要搜尋的條件</li>
-                <li>按下enter或者選擇送出鍵</li>
-                <li>
-                  再點擊展開後的備註或異動資訊一次，就能把它縮回去囉！
-                </li>
-                <li>
-                  這只是個簡單的小東西，希望能幫助到需要的人囉！
-                </li>
-                <li>
-                  原始碼放在<a target="_blank" href="https://github.com/abalone0204/NCCU-Class-Poor">github</a>上，裡面也有選課的資料以及說明，歡迎fork & share。
-                </li>
-                <li>
-                  如果有Bug的話，來
-                  <a target='_blank' href="https://www.facebook.com/denny.ku1/posts/796348323751958?notif_t=like">
-                    這裏
-                  </a>告訴我，或者上github開issue給我。
-                </li>
-                
-              </ol>
-            </div>
-          </div>
-        </section>
+      <div class="col-md-6" id='textCloud'>
       </div>
+      
       <div class="search col-md-6">
         <div class="row">
           <div class="className form-group col-xs-6 col-xs-offset-2">
@@ -95,6 +64,7 @@
         </div>
       </div>
     </div>
+
     <div class="table-hint-messages">
       
     </div>
@@ -151,7 +121,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="./underscore.js"></script>
     <script src="scripts/data/data-01-24.js"></script>
-    
+
+    <script src='bower_components/d3/d3.min.js'></script>
+    <script src="d3.layout.cloud.js"></script>
+    <script src="scripts/text_cloud_dataset.js"></script>
+    <script src="text_cloud.js"></script>
     <script src="scripts/script.js"></script>
   </body>
   
