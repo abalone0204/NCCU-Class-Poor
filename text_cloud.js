@@ -65,7 +65,6 @@ function draw(words) {
       x: center.x,
       y: center.y,
       "text-anchor": 'middle',
-      class: "shadow"
     },
     titleStyle = {
       'fill': '#0d7963',
@@ -102,23 +101,37 @@ function draw(words) {
     d3.select('svg').remove();
     renderCloud();
   });
-  // canvas.on('mouseover', function() {
-  //   title.transition()
-  //     .duration(250)
-  //     .style('opacity', 0);
-  // });
 }
 
 function hideTitle() {
   title.transition()
-    .duration(250)
-    .style('opacity', 0);
+    .duration(500)
+    .attr({
+      x: -100,
+      y: -100
+    })
+    .style({
+      'font-size': '12px',
+      'fill': '#DDD'
+    });
 }
 
 function showTitle() {
+  var titleAttr = {
+      x: center.x,
+      y: center.y,
+      "text-anchor": 'middle',
+    },
+    titleStyle = {
+      'fill': '#0d7963',
+      'opacity': 1,
+      'font-size': 50,
+    };
   title.transition()
+    .delay(500)
     .duration(250)
-    .style('opacity', 1);
+    .style(titleStyle)
+    .attr(titleAttr);
 }
 
 function renderCloud() {
