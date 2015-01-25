@@ -4,7 +4,7 @@ var filter = [],
   basicClassifications = [],
   paginations = [],
   perPage = 20,
-  mountain=['百年', '道藩', '語視', '舜文大講堂','傳院劇場','國際','傳播'];
+  mountain = ['百年', '道藩', '語視', '舜文大講堂', '傳院劇場', '國際', '傳播'];
 
 
 $("button").click(mainFunc);
@@ -56,7 +56,7 @@ function initAll() {
     $('.result-row').remove();
   }
   result = [];
-  paginations=[];
+  paginations = [];
   setBasicClassifications();
   setFilter(filter);
 }
@@ -157,13 +157,19 @@ function appendData(data) {
     return d[d.length - 1].length;
   });
   maxNumOfTd = maxNumOfTd[maxNumOfTd.length - 1].length;
-  console.log(maxNumOfTd);
+
   $(".result-row").remove();
   _.each(data, function(d) {
+
     $(".resultTable").append("<tr class='" + d[0] + " result-row'></tr>");
     var $container = $("." + d[0]);
+
     _.map(d, function(item, i) {
-      if (i == 11) {
+      if (i === 0) {
+        link = 'http://wa.nccu.edu.tw/QryTor/goMySelSubList.aspx?coursenum=' + d[0];
+        $container.append("<td><a target='_blank' href='"+link+"'>加入追蹤清單</a></td>");
+        $container.append("<td>" + item + "</td>");
+      } else if (i == 11) {
         if (item == "N/A") {
           $container.append("<td></td>");
         } else {
@@ -286,12 +292,12 @@ function validationFilter(filter, data) {
     }
 
     if (filter[6]) {
-      if (filter=='綜院') {
+      if (filter == '綜院') {
         if (d[6].match(/綜合/) !== null) {
           resetLocation = filter[6];
           filter[6] = d[6];
         }
-      } else{
+      } else {
         var rgxpLocation = new RegExp(filter[6])
         if (d[6].match(rgxpLocation) !== null) {
           resetLocation = filter[6];
@@ -316,9 +322,9 @@ function validationFilter(filter, data) {
   return tmp;
 }
 
-function finalFilter(filter, dataSet){
+function finalFilter(filter, dataSet) {
   flag = true;
-  for(var i =0 ;i<filter.length;i++){
+  for (var i = 0; i < filter.length; i++) {
     if (filter[i] && (filter[i] !== dataSet[i])) {
       flag = false;
     }
