@@ -1,5 +1,5 @@
 
-  var fill = d3.scale.category20(),
+  var fill = d3.scale.category20(),cloudSampleNum=25,
     w = $('.search').width(),
     h = $('.search').height(),
     margin = {
@@ -120,7 +120,7 @@ function showTitle(){
 }
 
 function renderCloud(){
-target = _.sample(textCloudWords, 20);
+target = _.sample(textCloudWords, cloudSampleNum);
 d3.layout.cloud().size([w, h])
     .words(target.map(function(d) {
       return {
