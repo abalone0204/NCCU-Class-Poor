@@ -38,7 +38,7 @@ for (var i = 0; i < data.length; i++) {
             data[i][k] = '';
         } else if (data[i][k].match(/^[A-Za-z].*/) !== null) {
             // Ref. Note NA還有UNIX是例外
-            if (data[i][k] !== "UNIX系統程式設計" && data[i][k] !== "SAS/R商業資料分析" && data[i][k] !== "WTO專題研究：服務貿易法") {
+            if (data[i][k] !== "UNIX系統程式設計" && data[i][k] !== "SAS/R商業資料分析" && data[i][k].match(/WTO專題研究/) === null) {
                 data[i][k] = '';
             }
         } else if (data[i][k] == '3D game programming' || data[i][k] == '19th Century English Literature' || data[i][k] == '20th Century English Literature') {
