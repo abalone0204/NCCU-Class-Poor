@@ -18,7 +18,7 @@
       <div class="col-md-6">
         <header class="shadow">
           <h2>
-          <a href="#">NCCU 選課查詢好棒棒</a>
+          NCCU 選課查詢好棒棒
           </h2>
         </header>
         <section class="well shadow">
@@ -35,7 +35,7 @@
                   這只是個簡單的小東西，希望能幫助到需要的人囉！
                 </li>
                 <li>
-                  原始碼放在<a href="https://github.com/abalone0204/NCCU-Class-Poor">github</a>上，裡面也有選課的資料以及說明，歡迎fork & share。
+                  原始碼放在<a target="_blank" href="https://github.com/abalone0204/NCCU-Class-Poor">github</a>上，裡面也有選課的資料以及說明，歡迎fork & share。
                 </li>
                 <li>
                   如果有Bug的話，來
@@ -57,6 +57,12 @@
           </div>
         </div>
         <div class="row">
+          <div class="proNameContainer form-group col-xs-6 col-xs-offset-2">
+            <label for="proName"> 教授名稱</label>
+            <input type="proName" for="proName" id="proName" class="form-control">
+          </div>
+        </div>
+        <div class="row">
           <div class="className form-group col-xs-6 col-xs-offset-2">
             <label for="className" >開課系級/體育/軍訓</label>
             <input type="text" name="classification" id="classification" placeholder="請輸入體育 軍訓 or開課系級" class="form-control">
@@ -75,9 +81,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="proNameContainer form-group col-xs-6 col-xs-offset-2">
-            <label for="proName"> 教授名稱</label>
-            <input type="proName" for="proName" id="proName" class="form-control">
+          <div class="classLocation form-group col-xs-6 col-xs-offset-2">
+            <label for="classLocation" >教室地點</label>
+            <input type="text" name="classLocation" id="classLocation" placeholder="例：綜院、大勇" class="form-control">
           </div>
         </div>
         <div class="row">

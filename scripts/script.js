@@ -3,8 +3,8 @@ var filter = [],
   times,
   basicClassifications = [],
   paginations = [],
-  perPage = 20;
-
+  perPage = 20,
+  mountain=['百年', '道藩', '語視', '舜文大講堂','傳院劇場','國際','傳播'];
 
 
 $("button").click(mainFunc);
@@ -77,6 +77,8 @@ function setFilter(filter) {
   filter[3] = $("#proName").val();
   filter[4] = $("#classification").val();
   filter[5] = $("#timeClassification").val();
+  filter[6] = $("#classLocation").val();
+  console.log(filter[6]);
 
   return filter;
 }
@@ -249,7 +251,8 @@ function testChinese(name) {
 
 function validationFilter(filter, data) {
   var tmp = [],
-    reset, resetTime, resetClassification, resetTeacher;
+    reset, resetTime, resetClassification, resetTeacher,
+    resetLocation;
   _.each(data, function(d) {
     if (filter[2]) {
       filterString = '.*' + filter[2].split('').join('.{0,1}') + '.*';
@@ -262,7 +265,7 @@ function validationFilter(filter, data) {
     if (filter[3]) {
       var rgxpTeacher = new RegExp(filter[3]);
       if (d[3].match(rgxpTeacher) !== null) {
-        resetTeacher = d[3];
+        resetTeacher = filter[3];
         filter[3] = d[3];
       }
     }
@@ -281,6 +284,22 @@ function validationFilter(filter, data) {
         }
       }
     }
+
+    if (filter[6]) {
+      if (filter=='綜院') {
+        if (d[6].match(/綜合/) !== null) {
+          resetLocation = filter[6];
+          filter[6] = d[6];
+        }
+      } else{
+        var rgxpLocation = new RegExp(filter[6])
+        if (d[6].match(rgxpLocation) !== null) {
+          resetLocation = filter[6];
+          filter[6] = d[6];
+        }
+
+      }
+    }
     // placeHolder = d[8];
     // d[8] = "xxxx";
     if (finalFilter(filter, d)) {
@@ -289,6 +308,7 @@ function validationFilter(filter, data) {
       filter[2] = reset;
       filter[3] = resetTeacher;
       filter[4] = resetClassification;
+      filter[6] = resetLocation;
 
     }
     // d[8] = placeHolder;

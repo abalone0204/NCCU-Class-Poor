@@ -20,8 +20,7 @@ var test = [];
 cleanSpace(data);
 for (var i = 0; i < data.length; i++) {
     data[i][0] = data[i][0].toString();
-    if (i ===1 ) {
-    }
+    if (i === 1) {}
     if (data[i][0].length < 9) {
         t = 9 - data[i][0].split('').length;
         ins = [];
@@ -44,9 +43,9 @@ for (var i = 0; i < data.length; i++) {
             if (data[i][k] !== "UNIX系統程式設計" && data[i][k] !== "SAS/R商業資料分析") {
                 data[i][k] = '';
             }
-        } else if(data[i][k] == '3D game programming' || data[i][k] =='19th Century English Literature'|| data[i][k] =='20th Century English Literature'){
+        } else if (data[i][k] == '3D game programming' || data[i][k] == '19th Century English Literature' || data[i][k] == '20th Century English Literature') {
             data[i][k] = '';
-        } 
+        }
         data[i][k] = data[i][k].replace('＠備註Note:', '');
         data[i][k] = data[i][k].replace('＠異動資訊Information of alteration:', '');
     }
@@ -54,13 +53,14 @@ for (var i = 0; i < data.length; i++) {
 
     data[i] = _.compact(data[i]);
     data[i].push(objHolder);
-    if (data[i].length<13) {
+    if (data[i].length < 13) {
         data[i].splice(6, 0, '暫缺資料');
     }
 
 }
 
 
+test = [];
 // num = [];
 // test = {
 //     11: [],
@@ -71,11 +71,53 @@ for (var i = 0; i < data.length; i++) {
 // };
 // // console.log(data[0].length);
 
-// _.each(data, function(d) {
-//     num.push(d.length);
-//     test[d.length].push(d);
-// });
+_.each(data, function(d) {
+    test.push(d[6].replace(/\d+/, ''));
+});
 
+test = _.uniq(test);
+
+secStage = [];
+_.each(test, function(d) {
+    secStage.push(d.replace(/\d+/, ''));
+});
+secStage = _.uniq(secStage);
+
+stage3 = [];
+_.each(secStage, function(d) {
+    if (d.length == 2) {
+        stage3.push(d);
+    }
+});
+stage3 = _.uniq(stage3);
+// console.log(stage3);
+
+stage4 = [];
+
+_.each(secStage, function(d) {
+    flag = true;
+    _.each(stage3, function(t) {
+        regxp = new RegExp(t);
+        if (d.match(regxp) !== null) {
+            flag = false;
+        }
+    });
+    if (flag) {
+        stage4.push(d);
+    }
+
+});
+stage4 = _.uniq(stage4);
+// 要連接的 stag3 
+stage5 = [];
+_.each(stage4, function(d){
+    stage5.push(d.slice(0,2));
+});
+stage5 = _.uniq(stage5);
+console.log(test);
+// console.log(stage5);
+
+// console.log(secStage.length);
 // console.log(test[12]);
 // console.log(test[12].length);
 // num = _.uniq(num);
