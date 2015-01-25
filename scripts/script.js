@@ -5,9 +5,17 @@ var filter = [],
   paginations = [],
   perPage = 20,
   mountain = ['百年', '道藩', '語視', '舜文大講堂', '傳院劇場', '國際', '傳播'];
+$('#clearBtn').on('click',function(){
+  clearMessage();
+  $("#point").val('');
+  $("#className").val('');
+  $("#proName").val('');
+  $("#classification").val('');
+  $("#timeClassification").val('');
+  $("#classLocation").val('');
+});
 
-
-$("button").click(mainFunc);
+$("#searchBtn").click(mainFunc);
 
 $(document).keypress(function(e) {
   if (e.which == 13) {
