@@ -105,6 +105,7 @@ function draw(words) {
 
 function hideTitle() {
   title.transition()
+    .delay(400)
     .duration(500)
     .attr({
       x: -100,
@@ -128,7 +129,7 @@ function showTitle() {
       'font-size': 50,
     };
   title.transition()
-    .delay(500)
+    .delay(800)
     .duration(250)
     .style(titleStyle)
     .attr(titleAttr);
