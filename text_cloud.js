@@ -73,7 +73,7 @@ $(function() {
       titleStyle = {
         'fill': '#0d7963',
         'opacity': 0,
-        'font-size': 50,
+        'font-size': 30,
       };
     title = canvas.append('text')
       .attr(titleAttr)
@@ -130,7 +130,7 @@ $(function() {
       titleStyle = {
         'fill': '#0d7963',
         'opacity': 1,
-        'font-size': 50,
+        'font-size': 30,
       };
     title.transition()
       .delay(800)
