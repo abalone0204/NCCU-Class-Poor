@@ -5,7 +5,7 @@ var filter = [],
   paginations = [],
   perPage = 20,
   mountain = ['百年', '道藩', '語視', '舜文大講堂', '傳院劇場', '國際', '傳播'];
-$('#clearBtn').on('click',function(){
+$('.clearBtn').on('click',function(){
   clearMessage();
   $("#point").val('');
   $("#className").val('');
@@ -15,7 +15,7 @@ $('#clearBtn').on('click',function(){
   $("#classLocation").val('');
 });
 
-$("#searchBtn").click(mainFunc);
+$(".searchBtn").click(mainFunc);
 
 $(document).keypress(function(e) {
   if (e.which == 13) {
@@ -80,13 +80,13 @@ function setBasicClassifications() {
 }
 
 function setFilter(filter) {
-  filter[1] = $("#point").val();
-  filter[2] = $("#className").val();
-  filter[3] = $("#proName").val();
-  filter[4] = $("#classification").val();
-  filter[5] = $("#timeClassification").val();
-  filter[6] = $("#classLocation").val();
-  console.log(filter[6]);
+  filter[1] = $("#point").val() ? $("#point").val() : $("#ponit-mobile").val();
+  filter[2] = $("#className").val() ? $("#className").val() : $("#className-mobile").val();
+  filter[3] = $("#proName").val() ? $("#proName").val() : $("#proName-mobile").val();
+  filter[4] = $("#classification").val() ? $("#classification").val() : $("#classification-mobile").val();
+  filter[5] = $("#timeClassification").val() ? $("#timeClassification").val(): $("#timeClassification-mobile").val();
+  filter[6] = $("#classLocation").val() ? $("#classLocation").val(): $("#classLocation-mobile").val();
+
 
   return filter;
 }
@@ -297,6 +297,9 @@ function validationFilter(filter, data) {
           filter[4] = d[4];
         }
       }
+    }
+    if (filter[5]) {
+      filter[5] = filter[5].toUpperCase();
     }
 
     if (filter[6]) {

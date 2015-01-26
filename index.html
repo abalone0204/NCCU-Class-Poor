@@ -15,11 +15,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12">
         <div id="textCloud">
           
         </div>
-        <section class="well shadow">
+        <section class="well shadow hidden-sm">
           <ol>
             <li>現在可以加入追蹤清單囉！</li>
             <li>按下enter或者點送出鍵搜尋</li>
@@ -46,49 +46,75 @@
         </section>
       </div>
       
-      <div class="search col-md-6">
+      <div class="search col-md-6 col-sm-12">
         <div class="row">
-          <div class="className form-group col-xs-6 col-xs-offset-2">
+          <div class="hidden-sm className form-group col-xs-6 col-xs-offset-2">
             <label for="className" >科目中文名稱</label>
             <input type="text" name="className" id="className" placeholder="請輸入科目名稱" class="form-control">
           </div>
+          <div class="visible-sm input-mobile col-xs-12 className form-group">
+            <input type="text" name="className" id="className-mobile" placeholder="請輸入科目中文名稱" class="form-control">
+          </div>
         </div>
         <div class="row">
-          <div class="proNameContainer form-group col-xs-6 col-xs-offset-2">
+          <div class="hidden-sm proNameContainer form-group col-xs-6 col-xs-offset-2">
             <label for="proName"> 教授名稱</label>
             <input type="proName" for="proName" id="proName" class="form-control">
           </div>
+          <div class="visible-sm input-mobile col-xs-12 proNameContainer form-group">
+            <input type="proName" for="proName" id="proName-mobile" class="form-control" placeholder="教授名稱">
+          </div>
         </div>
         <div class="row">
-          <div class="className form-group col-xs-6 col-xs-offset-2">
-            <label for="className" >開課系級/體育/軍訓</label>
+          <div class="hidden-sm classification form-group col-xs-6 col-xs-offset-2">
+            <label for="classification" >開課系級/體育/軍訓</label>
             <input type="text" name="classification" id="classification" placeholder="請輸入體育 軍訓 or開課系級" class="form-control">
           </div>
-        </div>
-        <div class="row">
-          <div class="timeClassificationContainer form-group col-xs-6 col-xs-offset-2">
-            <label for="timeClassification">開課時間</label>
-            <input type="text" placeholder="例：四CD，英文請用大寫" id="timeClassification" class="form-control">
+          <div class="visible-sm input-mobile col-xs-12 classification form-group">
+            <input type="text" name="classification" id="classification-mobile" placeholder="請輸入體育 軍訓 or開課系級" class="form-control">
           </div>
         </div>
         <div class="row">
-          <div class="pointContainer form-group col-xs-6 col-xs-offset-2">
+          <div class="hidden-sm timeClassificationContainer form-group col-xs-6 col-xs-offset-2 ">
+            <label for="timeClassification">開課時間</label>
+            <input type="text" placeholder="例：四CD" id="timeClassification" class="form-control">
+          </div>
+          <div class="visible-sm input-mobile col-xs-12   timeClassificationContainer form-group">
+            <input type="text" placeholder="開課時間，例：四CD" id="timeClassification-mobile" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="hidden-sm pointContainer form-group col-xs-6 col-xs-offset-2">
             <label for="point">學分數</label>
             <input type="number" for="point" id="point" class="form-control">
           </div>
-        </div>
-        <div class="row">
-          <div class="classLocation form-group col-xs-6 col-xs-offset-2">
-            <label for="classLocation" >教室地點</label>
-            <input type="text" name="classLocation" id="classLocation" placeholder="例：綜院、大勇" class="form-control">
+          <div class="visible-sm input-mobile col-xs-12 form-group">
+            <input type="number" for="point" id="point-mobile" class="form-control" placeholder='學分數'>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-6 col-xs-offset-2 ">
-            <button class="btn btn-default" id='searchBtn'>
+          <div class="hidden-sm classLocation form-group col-xs-6 col-xs-offset-2">
+            <label for="classLocation" >上課地點</label>
+            <input type="text" name="classLocation" id="classLocation" placeholder="例：綜院、大勇" class="form-control">
+          </div>
+          <div class="visible-sm input-mobile col-xs-12 classLocation form-group">
+            <input type="text" name="classLocation" id="classLocation-mobile" placeholder="上課地點，例：綜院" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-xs-offset-2 hidden-sm">
+            <button class="btn btn-default searchBtn">
             送出
             </button>
-            <button class="btn btn-default" id ='clearBtn'>
+            <button class="btn btn-default clearBtn">
+              清除
+            </button>
+          </div>
+          <div class='visible-sm input-mobile'>
+            <button class="btn-default btn-lg col-xs-6 searchBtn">
+            送出
+            </button>
+            <button class=" btn-default btn-lg col-xs-6 clearBtn">
               清除
             </button>
           </div>

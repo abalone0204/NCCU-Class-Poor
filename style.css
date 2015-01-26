@@ -161,3 +161,23 @@ td a:hover:after{
 svg text{
   cursor: pointer;
 }
+
+.input-mobile{
+  font-size: 50px;
+  text-align: center;
+}
+.input-mobile input::-webkit-input-placeholder{
+  padding-top: 20px;
+  line-height: 40px;
+  font-size: 50px;
+}
+
+.input-mobile .form-control{
+  height: 100px !important;
+  font-size: 50px;
+}
+.input-mobile button{
+  font-size: 50px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
