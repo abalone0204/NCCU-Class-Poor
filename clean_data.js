@@ -39,7 +39,7 @@ for (var i = 0; i < data.length; i++) {
         } else if (data[i][k].match(/^[A-Za-z].*/) !== null) {
             // Ref. Note NA還有UNIX是例外
             if (data[i][k] !== "UNIX系統程式設計" && data[i][k] !== "SAS/R商業資料分析" && data[i][k].match(/WTO專題研究/) === null) {
-                if (data[i][k].match(/Python程式/) === null) {
+                if (data[i][k].match(/Python程式/) === null && data[i][k].match(/XML技術/ === null && data[i][k].match(/Java 程式設計/ === null))) {
                     data[i][k] = '';
                 }
                 
