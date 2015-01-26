@@ -87,6 +87,7 @@ $(function() {
     text.on('click', function() {
       str = d3.select(this).text();
       $('#className').val(str);
+      $('#className-mobile').val(str);
     });
     text.on('mouseover', function() {
       hideTitle();
