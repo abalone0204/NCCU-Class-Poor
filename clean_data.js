@@ -16,6 +16,7 @@ console.log(rawDataPath);
 var data = require('./' + rawDataPath).data;
 
 cleanSpace(data);
+
 for (var i = 0; i < data.length; i++) {
     data[i][0] = data[i][0].toString();
     if (i === 1) {}
